@@ -12,19 +12,22 @@ from flask import jsonify, abort, make_response, request
 from models.city import City
 
 
-@app_views.route("/states/<state_id>/cities", methods=["GET"], strict_slashes=False)
+@app_views.route("/states/<state_id>/cities",
+                 methods=["GET"],
+                 strict_slashes=False)
 def get_city(state_id):
     """get all cities"""
     states = storage.get(State, state_id)
     if states is None:
         abort(404)
-    cities = storage.all(City).values() 
+    cities = storage.all(City).values()
     result = []
     for i in cities:
         if i.state_id == state_id:
             result.append(i.to_dict())
 
     return(jsonify(result))
+
 
 @app_views.route("/cities/<city_id>", methods=["GET"], strict_slashes=False)
 def get_cities(city_id):
@@ -49,7 +52,9 @@ def delete_cities(city_id):
     return make_response(jsonify(), 200)
 
 
-@app_views.route("/states/<state_id>/cities", methods=["POST"], strict_slashes=False)
+@app_views.route("/states/<state_id>/cities",
+                 methods=["POST"],
+                 strict_slashes=False)
 def Creates_cities(state_id):
     """creates states"""
     sta = storage.get(State, state_id)
