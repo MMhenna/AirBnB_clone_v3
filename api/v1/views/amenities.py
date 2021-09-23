@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-States  view
+Amenities view
 """
 
 
@@ -24,7 +24,7 @@ def get_amenities():
 @app_views.route("/amenities/<amenity_id>",
                  methods=["GET"],
                  strict_slashes=False)
-def get_amenities(amenity_id):
+def get_amenitie(amenity_id):
     """get selecte amenities """
     Afsa = storage.get(Amenity, amenity_id)
     if Afsa is None:
